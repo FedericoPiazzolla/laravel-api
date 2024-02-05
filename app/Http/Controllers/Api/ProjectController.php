@@ -10,13 +10,16 @@ class ProjectController extends Controller
 {
     public function index()
     {
-      $projects = Project::all(); 
-      return response()->json(['result' => $projects]);
+      $projects = Project::with(['technologies'])->paginate(6); 
+
+      return response()->json([
+        'results' => $projects,
+      ]);
     }
 
     public function show(string $slug)
     {
-      $project = Project::with('technology', 'types', 'user')->where('slug', $slug)->first();
+      $project = Project::with('technologies', 'type')->where('slug', $slug)->first();
 
       if ($project) {
 
@@ -29,7 +32,7 @@ class ProjectController extends Controller
 
         return response()->json([
           'success' => false,
-          'message' => 'Nessun Project Trovato'
+          'message' => 'no project found'
         ]);
 
       }
