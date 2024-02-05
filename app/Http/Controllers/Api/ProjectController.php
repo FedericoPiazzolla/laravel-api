@@ -13,4 +13,9 @@ class ProjectController extends Controller
       $projects = Project::all(); 
       return response()->json(['result' => $projects]);
     }
+
+    public function show(string $slug)
+    {
+      $project = Project::with('technology', 'types', )
+    }
 }
