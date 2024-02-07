@@ -4,7 +4,10 @@
     <div class="container mt-5">
       <a class="btn btn-success my-3" href="{{ route('admin.projects.index') }}">&LeftArrow; back</a>
       <h2>{{ $project->title }}</h2>
+      
       <p>Type: {{ $project->type ? $project->type->name : 'No Type assigned' }}</p>
+
+      <img class="w-50" src="{{ asset("storage/".$project->image_path) }}" alt="">
 
       <div>
         <p>{{ $project->content }}</p>
