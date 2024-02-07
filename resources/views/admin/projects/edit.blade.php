@@ -6,7 +6,7 @@
     <a class="my-5 btn btn-success" href="{{ route('admin.projects.index') }}">&LeftArrow; back</a>
     <h2 class="flex-grow-1">Edit Page</h2>
 
-    <form action="{{ route('admin.projects.update', ['project' => $project->slug]) }}" method="POST">
+    <form action="{{ route('admin.projects.update', ['project' => $project->slug]) }}" method="POST" enctype="multipart/form-data">
       @csrf
       @method('PUT')
 
@@ -18,6 +18,13 @@
           <div class="invalid-feedback">{{ $message }}</div>
         @enderror
       </div>
+
+      {{-- image --}}
+      <div class="mb-3">
+        <label for="image_path" class="form-label">Image</label>
+        <input type="file" class="form-control" id="image_path" name="image_path">
+      </div>
+      {{-- /image --}}
 
       {{-- Type --}}
       <div class="mb-3 has-validation">

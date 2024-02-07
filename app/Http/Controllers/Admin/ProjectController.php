@@ -101,6 +101,17 @@ class ProjectController extends Controller
     public function update(UpdateProjectRequest $request, Project $project)
     {
         $form_data = $request->validated();
+
+        if ($request->hasFile('image_path')) {
+
+            if ($project->image_path) {
+                Storage::delete($project->image_path);
+            }
+
+            $path = Storage::put('project_image', $request->image_path);
+            $form_data['image_path'] = $path;
+        }
+
         $project->update($form_data);
 
         if ($request->has('technologies')) {
