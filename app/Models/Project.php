@@ -10,7 +10,7 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'content', 'slug', 'type_id'];
+    protected $fillable = ['title', 'image_path', 'content', 'slug', 'type_id'];
 
     public function setTitleAttribute($_title)
     {

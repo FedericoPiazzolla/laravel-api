@@ -6,7 +6,7 @@
 
       <h2 class="text-center">Insert a new Projects</h2>
 
-      <form class="mt-5" action="{{ route('admin.projects.store') }}" method="POST">
+      <form class="mt-5" action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
         @csrf 
 
         <div class="mb-3 has-validation">
@@ -17,6 +17,13 @@
             <div class="invalid-feedback">{{ $message }}</div>
           @enderror
         </div>
+
+        {{-- image --}}
+        <div class="mb-3">
+          <label for="image-path" class="form-label">Image</label>
+          <input type="file" class="form-control" id="image-path" name="image-path">
+        </div>
+        {{-- /image --}}
 
         {{-- types --}}
         <div class="mb-3 has-validation">

@@ -9,6 +9,7 @@ use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use illuminate\Support\Str;
 
 class ProjectController extends Controller
@@ -45,8 +46,16 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         $form_data = $request->validated();
+
         $project = new Project();
         $project->fill($form_data);
+
+        // image validation
+        if ($request->hasFile('image_path')) {
+            $image_path = Storage::put('project_image', $request->image_path);
+            $project->image_path = $image_path;
+        }
+
         $project->save();
 
         // Associo le technologies selected al nuovo progetto
